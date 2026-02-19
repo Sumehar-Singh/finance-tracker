@@ -1,44 +1,72 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ProtectedRoute from './components/ProtectedRoute';
-import Navbar from './components/Navbar';
-import Dashboard from './pages/Dashboard';
+
+// Layouts
+import PublicLayout from './layouts/PublicLayout';
+import DashboardLayout from './layouts/DashboardLayout';
+import AuthLayout from './layouts/AuthLayout';
+
+// Pages
+import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
+import TransactionsPage from './pages/TransactionsPage';
+import BudgetGoals from './pages/BudgetGoals';
+import LoanCalculator from './pages/LoanCalculator';
+import ChartsPage from './pages/ChartsPage';
+import Reports from './pages/Reports';
 import Profile from './pages/Profile';
-
-import LandingPage from './pages/LandingPage';
 
 export default function App() {
   return (
     <Router>
       <ThemeProvider>
         <AuthProvider>
-          <div className="min-h-screen bg-background dark:bg-gray-900 transition-colors duration-200 font-sans">
-            <Navbar />
-            <Routes>
+          <Routes>
+            {/* Public Routes with Navbar */}
+            <Route element={<PublicLayout />}>
               <Route path="/" element={<LandingPage />} />
+            </Route>
+
+            {/* Auth Routes (Split Layout, No Navbar) */}
+            <Route element={<AuthLayout />}>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute>
-                    <Profile />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </div>
+            </Route>
+
+            {/* Protected Routes with Sidebar */}
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <DashboardLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Dashboard />} />
+              <Route path="transactions" element={<TransactionsPage />} />
+              <Route path="budget" element={<BudgetGoals />} />
+              <Route path="loan-calculator" element={<LoanCalculator />} />
+              <Route path="charts" element={<ChartsPage />} />
+              <Route path="reports" element={<Reports />} />
+            </Route>
+
+            {/* Profile is sort of standalone or can be in dashboard. Putting in dashboard layout for consistency */}
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <DashboardLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Profile />} />
+            </Route>
+
+          </Routes>
         </AuthProvider>
       </ThemeProvider>
     </Router>

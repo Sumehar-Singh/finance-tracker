@@ -24,20 +24,17 @@ export default function LandingPage() {
             {/* Hero Section */}
             <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
                 {/* Rich Professional Background */}
-                <div className="absolute inset-0 -z-10 h-full w-full bg-white dark:bg-black">
-                    {/* Base Tint to kill stark white */}
-                    <div className="absolute inset-0 bg-emerald-50/50 dark:bg-emerald-950/20"></div>
+                {/* Organic Aurora Background - FIXED VISIBILITY */}
+                <div className="absolute inset-0 z-0 h-full w-full overflow-hidden" style={{ background: 'linear-gradient(135deg, #f0fdf4 0%, #ffffff 60%, #ecfdf5 100%)' }}>
+                    {/* Dark Mode Overlay */}
+                    <div className="absolute inset-0 bg-black/0 dark:bg-black/90 transition-colors"></div>
 
-                    {/* Strong Main Spotlight */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[800px] w-[1000px] bg-[radial-gradient(circle_at_50%_0%,#10b98140,transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_0%,#10b98150,transparent_70%)] blur-[60px]"></div>
-
-                    {/* Secondary Teal Glow (Right) */}
-                    <div className="absolute top-0 right-[-10%] h-[600px] w-[600px] bg-[radial-gradient(circle_at_50%_0%,#2dd4bf30,transparent_60%)] dark:bg-[radial-gradient(circle_at_50%_0%,#2dd4bf20,transparent_60%)] blur-[80px]"></div>
-
-                    {/* Tertiary Green Glow (Left) */}
-                    <div className="absolute top-20 left-[-10%] h-[500px] w-[500px] bg-[radial-gradient(circle_at_50%_0%,#34d39930,transparent_60%)] dark:bg-[radial-gradient(circle_at_50%_0%,#34d39920,transparent_60%)] blur-[80px]"></div>
+                    {/* Moving Mesh Gradients - Softer & Lighter */}
+                    <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-300/30 rounded-full blur-[80px] animate-blob mix-blend-multiply dark:mix-blend-screen"></div>
+                    <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-teal-300/30 rounded-full blur-[80px] animate-blob animation-delay-2000 mix-blend-multiply dark:mix-blend-screen"></div>
+                    <div className="absolute bottom-[-10%] left-[20%] w-[500px] h-[500px] bg-green-300/30 rounded-full blur-[80px] animate-blob animation-delay-4000 mix-blend-multiply dark:mix-blend-screen"></div>
                 </div>
-                <div className="w-[80%] max-w-7xl mx-auto px-6 text-center relative z-10">
+                <div className="w-[90%] md:w-[80%] max-w-7xl mx-auto px-6 text-center relative z-10">
                     <motion.span
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -66,31 +63,86 @@ export default function LandingPage() {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.5, duration: 0.5 }}
-                        className="flex flex-col sm:flex-row justify-center gap-4"
+                        className="flex flex-col sm:flex-row justify-center gap-4 items-center"
                     >
                         <Link
                             to="/register"
-                            className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-black dark:bg-emerald-600 rounded-full hover:bg-emerald-700 dark:hover:bg-emerald-500 transition-all transform hover:scale-105 shadow-lg shadow-emerald-900/20"
+                            className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-black dark:bg-emerald-600 rounded-full hover:bg-emerald-700 dark:hover:bg-emerald-500 transition-all transform hover:scale-105 shadow-lg shadow-emerald-900/20 w-full sm:w-auto"
                         >
-                            Start for Free <ArrowRight className="ml-2" />
-                        </Link>
-                        <Link
-                            to="/login"
-                            className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-black dark:text-white bg-white dark:bg-black border-2 border-gray-200 dark:border-gray-800 rounded-full hover:bg-gray-50 dark:hover:bg-gray-900 transition-all"
-                        >
-                            Log In
+                            Create New Account <ArrowRight className="ml-2" />
                         </Link>
                     </motion.div>
                 </div>
 
-                {/* Background Decorative Blobs */}
-                <div className="absolute top-1/4 left-0 w-96 h-96 bg-emerald-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob" />
-                <div className="absolute bottom-0 right-0 w-96 h-96 bg-green-100/40 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000" />
+            </section>
+
+            {/* How It Works Section */}
+            <section id="how-it-works" className="py-24 bg-gray-50 dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+                <div className="w-[90%] md:w-[80%] max-w-7xl mx-auto px-6">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={fadeInUp}
+                        className="text-center mb-16"
+                    >
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black dark:text-white">How It Works</h2>
+                        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                            Three simple steps to financial freedom.
+                        </p>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                        {/* Connecting Line (Desktop) */}
+                        <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-200 dark:from-emerald-900 dark:via-emerald-700 dark:to-emerald-900 -z-10"></div>
+
+                        {[
+                            {
+                                step: "01",
+                                title: "Create Account",
+                                desc: "Sign up in seconds and set up your secure profile.",
+                                icon: <ShieldCheck size={28} className="text-emerald-600 dark:text-emerald-400" />
+                            },
+                            {
+                                step: "02",
+                                title: "Track Spending",
+                                desc: "Log your daily transactions easily or import data.",
+                                icon: <Zap size={28} className="text-emerald-600 dark:text-emerald-400" />
+                            },
+                            {
+                                step: "03",
+                                title: "See Insights",
+                                desc: "Visualize your habits with beautiful, interactive charts.",
+                                icon: <PieChart size={28} className="text-emerald-600 dark:text-emerald-400" />
+                            }
+                        ].map((item, idx) => (
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: idx * 0.2 }}
+                                className="relative flex flex-col items-center text-center"
+                            >
+                                <div className="w-24 h-24 bg-white dark:bg-gray-800 rounded-full border-4 border-emerald-50 dark:border-emerald-900/30 flex items-center justify-center mb-6 shadow-lg z-10 relative group hover:border-emerald-200 dark:hover:border-emerald-800 transition-colors">
+                                    <div className="absolute -top-3 -right-3 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+                                        {item.step}
+                                    </div>
+                                    {item.icon}
+                                </div>
+                                <h3 className="text-xl font-bold mb-3 text-black dark:text-white">{item.title}</h3>
+                                <p className="text-gray-600 dark:text-gray-400 leading-relaxed px-4">{item.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+
+
+                </div>
             </section>
 
             {/* Services Section */}
             <section id="services" className="py-24 bg-white dark:bg-black">
-                <div className="w-[80%] max-w-7xl mx-auto px-6">
+                <div className="w-[90%] md:w-[80%] max-w-7xl mx-auto px-6">
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
@@ -105,7 +157,7 @@ export default function LandingPage() {
                     </motion.div>
 
                     <motion.div
-                        className="grid md:grid-cols-3 gap-8"
+                        className="grid grid-cols-1 md:grid-cols-3 gap-8"
                         variants={staggerContainer}
                         initial="hidden"
                         whileInView="visible"
@@ -149,10 +201,10 @@ export default function LandingPage() {
 
             {/* Features Section */}
             <section id="features" className="py-24 bg-gray-50 dark:bg-black border-t border-gray-100 dark:border-gray-900">
-                <div className="w-[80%] max-w-7xl mx-auto px-6">
+                <div className="w-[90%] md:w-[80%] max-w-7xl mx-auto px-6">
                     <div className="flex flex-col lg:flex-row items-center gap-16">
                         <motion.div
-                            className="lg:w-1/2"
+                            className="lg:w-1/2 w-full"
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
@@ -179,7 +231,7 @@ export default function LandingPage() {
                         </motion.div>
 
                         <motion.div
-                            className="lg:w-1/2 grid grid-cols-2 gap-6"
+                            className="lg:w-1/2 w-full grid grid-cols-1 sm:grid-cols-2 gap-6"
                             initial={{ opacity: 0, x: 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
@@ -212,7 +264,7 @@ export default function LandingPage() {
 
             {/* CTA Section */}
             <section className="py-20 bg-black text-white text-center">
-                <div className="w-[80%] max-w-7xl mx-auto px-6">
+                <div className="w-[90%] md:w-[80%] max-w-7xl mx-auto px-6">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -226,44 +278,26 @@ export default function LandingPage() {
                             to="/register"
                             className="inline-block px-10 py-4 bg-emerald-600 text-white text-lg font-bold rounded-full hover:bg-emerald-700 transition-colors shadow-2xl shadow-emerald-900/50"
                         >
-                            Create Free Account
+                            Create New Account
                         </Link>
                     </motion.div>
                 </div>
             </section>
 
             {/* Footer */}
-            <footer className="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
-                <div className="w-[80%] max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
-                    <div>
-                        <h3 className="text-white text-xl font-bold mb-4">FinanceTracker</h3>
-                        <p className="text-sm">Making financial freedom accessible to everyone.</p>
+            <footer className="bg-gray-900 text-gray-300 py-6 border-t border-gray-800">
+                <div className="w-[90%] md:w-[80%] max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div className="text-center md:text-left">
+                        <h3 className="text-white text-xl font-bold mb-2">FinanceTracker</h3>
+                        <p className="text-sm text-gray-400 max-w-md">Making financial freedom accessible to everyone with powerful tools and insights.</p>
                     </div>
-                    <div>
-                        <h4 className="text-white font-bold mb-4">Product</h4>
-                        <ul className="space-y-2 text-sm">
-                            <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Security</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 className="text-white font-bold mb-4">Company</h4>
-                        <ul className="space-y-2 text-sm">
-                            <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 className="text-white font-bold mb-4">Legal</h4>
-                        <ul className="space-y-2 text-sm">
-                            <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                        </ul>
+                    <div className="flex gap-8">
+                        <a href="#how-it-works" className="text-sm font-medium hover:text-emerald-400 transition-colors">How it Works</a>
+                        <a href="#services" className="text-sm font-medium hover:text-emerald-400 transition-colors">Services</a>
+                        <a href="#features" className="text-sm font-medium hover:text-emerald-400 transition-colors">Features</a>
                     </div>
                 </div>
-                <div className="text-center mt-12 pt-8 border-t border-gray-800 text-sm opacity-50">
+                <div className="text-center mt-6 pt-6 border-t border-gray-800 text-sm opacity-50">
                     © {new Date().getFullYear()} Personal Finance Tracker. All rights reserved.
                 </div>
             </footer>

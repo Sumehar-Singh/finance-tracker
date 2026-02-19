@@ -3,9 +3,11 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
+    updateProfile
 } from "firebase/auth";
-import { auth } from "../firebase/config";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../firebase/config";
 
 const AuthContext = createContext();
 
@@ -17,15 +19,22 @@ export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    async function signup(email, password) {
+    async function signup(email, password, displayName) {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Create user profile in Realtime Database
-        const { ref, set } = await import("firebase/database");
-        const { database } = await import("../firebase/config");
+        // Update Firebase Auth Profile
+        await updateProfile(user, { displayName });
 
-        await set(ref(database, 'users/' + user.uid), {
+        // Force refresh of the user to get the updated profile in local state
+        await user.reload();
+        if (auth.currentUser) {
+            setCurrentUser({ ...auth.currentUser });
+        }
+
+        // Create user profile in Firestore
+        await setDoc(doc(db, 'users', user.uid), {
+            displayName,
             email: user.email,
             createdAt: new Date().toISOString()
         });
