@@ -18,7 +18,7 @@ import BudgetGoals from './pages/BudgetGoals';
 import LoanCalculator from './pages/LoanCalculator';
 import ChartsPage from './pages/ChartsPage';
 import Reports from './pages/Reports';
-import Profile from './pages/Profile';
+
 
 export default function App() {
   return (
@@ -54,17 +54,7 @@ export default function App() {
               <Route path="reports" element={<Reports />} />
             </Route>
 
-            {/* Profile is sort of standalone or can be in dashboard. Putting in dashboard layout for consistency */}
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<Profile />} />
-            </Route>
+
 
           </Routes>
         </AuthProvider>
