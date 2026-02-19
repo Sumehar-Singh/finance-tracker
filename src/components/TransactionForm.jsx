@@ -101,6 +101,7 @@ export default function TransactionForm({ uid, closeForm, initialData, existingC
                         <input
                             type="date"
                             required
+                            max={new Date().toISOString().split('T')[0]} // Disable future dates
                             onChange={(e) => setDate(e.target.value)}
                             value={date}
                             className="w-full p-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-emerald-500/50 outline-none transition-all"
